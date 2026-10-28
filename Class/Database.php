@@ -2,9 +2,10 @@
 Class Database {
     protected $conn;
     public function __construct(){
-        $config = parse_ini_file(__DIR__ ."/../.env");
-        if ($config === false) {
-            throw new RuntimeException('Unable to read database configuration');
+        if (file_exists(__DIR__ . '/../.env')) {
+            $config = parse_ini_file(__DIR__ . '/../.env');
+        }else{
+            $_ENV =$_ENV ?:getenv();
         }
 
         $_ENV=parse_ini_file(__DIR__ ."/../.env");
